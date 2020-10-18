@@ -7,13 +7,13 @@ running Java natively.
 ### Building Container
 
 ```sh
-make container BFG_VERSION=1.12.14
+make container BFG_VERSION=1.13.0
 ```
 
 ### Easily Using the Container
 
 ```sh
-make install BFG_VERSION=1.12.14
+make install BFG_VERSION=1.13.0
 ```
 
 ### Manually Using the Container
@@ -23,5 +23,14 @@ docker run \
     --rm \
     -v $(readlink -m $(pwd)):/code \
     -w /code \
-    tomislacker/bfg:1.12.14 # Then add your args here
+    tomislacker/bfg:1.13.0 # Then add your args here
+```
+
+#### Run example using windows/another bind mount to get the bfg report back
+```
+docker run `
+    --rm `
+    -v ${PWD}/yourRepo:/code -w /code `
+    -v ${PWD}/bfgReport:/code.bfg-report -w /code.bfg-report `
+    tomisslacker/bfg:1.13.0 # Then add your args here
 ```

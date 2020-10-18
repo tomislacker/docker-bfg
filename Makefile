@@ -1,4 +1,4 @@
-BFG_VERSION := 1.12.14
+BFG_VERSION := 1.13.0
 
 IMAGE_REPO  := tomislacker/bfg
 IMAGE_TAG   := $(BFG_VERSION)
