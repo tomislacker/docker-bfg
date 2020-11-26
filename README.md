@@ -16,6 +16,9 @@ make container BFG_VERSION=1.13.0
 make install BFG_VERSION=1.13.0
 ```
 
+### clone your repo as a mirror
+`git clone --mirror https://github.com/tomislacker/docker-bfg.git`
+
 ### Manually Using the Container
 
 ```sh
@@ -26,11 +29,15 @@ docker run \
     tomislacker/bfg:1.13.0 # Then add your args here
 ```
 
-#### Run example using windows/another bind mount to get the bfg report back
+##### Use BFG to remove a list of secrets from history
+Create a list of secrets inside of the parent folder of your bare repo, in a file named secrets.txt
+
+then run the image, and pass these arguments to filter those patterns out of the git history
 ```
 docker run `
-    --rm `
-    -v ${PWD}/yourRepo:/code -w /code `
-    -v ${PWD}/bfgReport:/code.bfg-report -w /code.bfg-report `
-    tomisslacker/bfg:1.13.0 # Then add your args here
-```
+--rm `
+ -v ${PWD}/docker-bfg.git:/code -w /code `
+ -v ${PWD}/secrets.txt:/home/secrets.txt `
+ -v ${PWD}/bfgReport:/code.bfg-report -w /code.bfg-report `
+  tomislacker/bfg:1.13.0 --replace-text /home/secrets.txt /code
+   ```
