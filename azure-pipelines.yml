@@ -8,6 +8,7 @@ resources:
       - repository: templates
         type: github
         name: brandonmcclure/Community-Az-Devops-Pipeline-Templates
+        endpoint: brandonmcclure
       - repository: self
 
 variables:
