@@ -9,10 +9,10 @@ resources:
         pr:
           - main
       - repository: self
-        trigger:
-          - main
-        pr:
-          - main
+trigger:
+  - main
+pr:
+  - main
 
 variables:
   tag: '$(Build.BuildId)'
