@@ -6,8 +6,6 @@ resources:
         endpoint: githubServiceConnection
         trigger:
           - main
-        pr:
-          - main
       - repository: self
 trigger:
   - main
