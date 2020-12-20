@@ -1,15 +1,18 @@
-trigger:
-- main
-pr:
-- main
-
 resources:
   repositories:
       - repository: templates
         type: github
         name: brandonmcclure/Community-Az-Devops-Pipeline-Templates
         endpoint: githubServiceConnection
+        trigger:
+          - main
+        pr:
+          - main
       - repository: self
+        trigger:
+          - main
+        pr:
+          - main
 
 variables:
   tag: '$(Build.BuildId)'
@@ -54,6 +57,7 @@ stages:
         - template: 'Steps/Build-DockerImage.yml@templates'
           parameters: 
             appName: docker-bfg
+            platforms: linux/amd64
         - task: Docker@2
           inputs:
             containerRegistry: 'Docker Hub'
