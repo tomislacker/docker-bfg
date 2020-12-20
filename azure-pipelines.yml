@@ -48,7 +48,7 @@ stages:
     - job: BuildAndPublishImage
       displayName: Build and publish image
       pool:
-        vmImage: 'ubuntu-latest'
+        vmImage: 'windows-latest'
       steps:
         - task: Docker@2
           inputs:
@@ -57,7 +57,7 @@ stages:
         - template: 'Steps/Build-DockerImage.yml@templates'
           parameters: 
             appName: docker-bfg
-            platforms: linux/amd64
+            platforms: linux/amd64,windows/amd64
         - task: Docker@2
           inputs:
             containerRegistry: 'Docker Hub'

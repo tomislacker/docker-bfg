@@ -1,9 +1,9 @@
 FROM        openjdk:8-jre
-MAINTAINER  Ben Tomasik <tomislacker@users.noreply.github.com>
+LABEL MAINTAINER="Ben Tomasik <tomislacker@users.noreply.github.com>"
 
 ARG         BFG_VERSION=1.13.0
 
-VOLUME      ['/code']
+VOLUME      ["/code"]
 
 WORKDIR /usr/bin/bfg
 RUN    wget \

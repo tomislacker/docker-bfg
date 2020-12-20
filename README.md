@@ -1,3 +1,5 @@
+[![Docker Stars](https://img.shields.io/docker/stars/bmcclure89/docker-bfg.svg?style=flat-square)](https://hub.docker.com/r/bmcclure89/docker-bfg/) [![Docker Pulls](https://img.shields.io/docker/pulls/bmcclure89/docker-bfg.svg?style=flat-square)](https://hub.docker.com/r/bmcclure89/docker-bfg/) [![Build Status](https://dev.azure.com/brandonmcclure89/docker-bfg/_apis/build/status/brandonmcclure.docker-bfg?branchName=main)](https://dev.azure.com/brandonmcclure89/docker-bfg/_build/latest?definitionId=13&branchName=main)
+
 # docker-bfg
 Containerizes the
 [BFG Repo-Cleaner](https://rtyley.github.io/bfg-repo-cleaner/) because I hate
