@@ -1,0 +1,60 @@
+trigger:
+- main
+pr:
+- main
+
+resources:
+  repositories:
+      - repository: templates
+        type: github
+        name: brandonmcclure/Community-Az-Devops-Pipeline-Templates
+      - repository: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: PrepImage
+  displayName: Prep docker image
+  jobs:
+  - job: PrepImage
+    displayName: Prep image
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - checkout: self
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: ''
+        Contents: '**'
+        TargetFolder: '$(build.artifactstagingdirectory)'
+        CleanTargetFolder: true
+        OverWrite: true
+        preserveTimestamp: true
+    - task: PublishPipelineArtifact@1
+      displayName: publish docker_context artifact
+      inputs:
+        targetPath: '$(build.artifactstagingdirectory)'
+        artifact: 'docker_context'
+        publishLocation: 'pipeline'
+- stage: BuildMultiArchImage
+  displayName: Build image 
+  dependsOn: PrepImage  
+  jobs:
+    - job: BuildAndPublishImage
+      displayName: Build and publish image
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+        - task: Docker@2
+          inputs:
+            containerRegistry: 'Brandon''s Docker Hub'
+            command: 'login'
+        - template: 'Steps/Build-DockerImage.yml@templates'
+          parameters: 
+            appName: docker-bfg
+        - task: Docker@2
+          inputs:
+            containerRegistry: 'Brandon''s Docker Hub'
+            command: 'logout'
+    
